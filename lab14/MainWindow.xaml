@@ -1,0 +1,45 @@
+﻿<Window x:Class="lab14.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:lab14"
+        mc:Ignorable="d"
+        Title="MVVM Example" Height="403.921" Width="310.294" Closed="Window_Closed">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" DataContext="{Binding SelectedCar}" Grid.ColumnSpan="2">
+            <TextBlock Text="Выбранный элемент" Margin="0,0,-233,0" />
+            <TextBlock Text="Модель" />
+            <TextBox Text="{Binding Model, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Максимальная скрорость, км/ч" />
+            <TextBox Text="{Binding MaxSpeed, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Цена, руб." />
+            <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Скидка, %."/>
+            <Slider Minimum="0" Maximum="100" Value="{Binding Discount, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DiscountConvert}}"
+                   SmallChange="5" LargeChange="5"/>
+            <Button Click="Add_Click">+</Button>
+            <Button Click="Delete_Click">-</Button>
+        </StackPanel>
+        <ListBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" Margin="0,194,0,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="18" Text="{Binding Path=Model}" />
+                        <TextBlock Text="{Binding Path=MaxSpeed}" />
+                        <TextBlock>
+                            <TextBlock Text="{Binding Path=Price}" TextDecorations="{Binding Path=Discount,Converter={StaticResource DiscountToTextDecorConvert}}"/>
+                            <TextBlock Text="{Binding Path=PriceWithDiscount, StringFormat={} {0}}"
+                                       Foreground="Red" Visibility="{Binding Path=Discount, Converter={StaticResource DiscountToVisibleConvert}}" />
+                        </TextBlock>
+                        <TextBlock Text="{Binding Path=Discount}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+
+</Window>
