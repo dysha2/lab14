@@ -24,7 +24,10 @@ namespace lab14
             }
         }
         public double Discount { get { return _discount; }
-        set { _discount = value; OnPropertyChanged("Discount"); }
+        set { _discount = value; 
+                OnPropertyChanged("Discount");
+                OnPropertyChanged("PriceWithDiscount");
+            }
         }
         public int MaxSpeed { 
             get { return _maxSpeed; }
@@ -38,13 +41,12 @@ namespace lab14
             get { return _price; }
             set { _price = value;
                 OnPropertyChanged("Price");
-
+                OnPropertyChanged("PriceWithDiscount");
             }
         }
         public decimal PriceWithDiscount
         {
             get { return Price * (decimal)(1 - Discount);  }
-            set { OnPropertyChanged("PriceWithDiscount"); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
