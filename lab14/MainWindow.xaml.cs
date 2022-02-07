@@ -24,6 +24,7 @@ namespace lab14
         {
             InitializeComponent();
             DataContext = new CarViewModel();
+            ComboBoxCategory.ItemsSource = Car.Categories;
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -41,5 +42,9 @@ namespace lab14
             ((CarViewModel)DataContext).RefreshSource();
         }
 
+        private void SetDiscountForCategory(object sender, RoutedEventArgs e)
+        {
+            ((CarViewModel)DataContext).SetDiscountForCategory();
+        }
     }
 }

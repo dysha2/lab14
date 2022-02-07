@@ -14,6 +14,8 @@ namespace lab14
         private int _maxSpeed;
         private double _discount;
         private decimal _price;
+        public static string[] Categories { get; } = new string[] { "Легковой", "Грузовой", "Мотоцикл" };
+        private string _category;
         public string Model
         {
             get { return _model; }
@@ -21,6 +23,15 @@ namespace lab14
             {
                 _model = value;
                 OnPropertyChanged("Model");
+            }
+        }
+        public string Category
+        {
+            get { return _category; }
+            set
+            {
+                _category = value;
+                OnPropertyChanged("Category");
             }
         }
         public double Discount { get { return _discount; }

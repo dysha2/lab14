@@ -13,7 +13,7 @@ namespace lab14
 {
     public class CarViewModel:INotifyPropertyChanged
     {
-        private Car _selectedCar;
+        private Car _selectedCar=new Car();
         public ObservableCollection<Car> Cars { get; set; }
         public CarViewModel()
         {
@@ -34,10 +34,7 @@ namespace lab14
         }
         public void AddCar()
         {
-            Car car = new Car();
-            Cars.Insert(0, car);
-            SelectedCar = car;
-            
+            Cars.Insert(0, _selectedCar);
         }
         public void DeleteCar()
         {
@@ -45,6 +42,10 @@ namespace lab14
             {
                 Cars.Remove(SelectedCar);
             }
+        }
+        public void SetDiscountForCategory()
+        {
+            Cars.Where(x => x.Category == _selectedCar.Category).ToList().ForEach(x => x.Discount = _selectedCar.Discount);
         }
         public void RefreshSource()
         {
