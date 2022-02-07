@@ -41,6 +41,7 @@ namespace lab14
             if (_selectedCar != null)
             {
                 Cars.Remove(SelectedCar);
+                SelectedCar = new Car();
             }
         }
         public void SetDiscountForCategory()
