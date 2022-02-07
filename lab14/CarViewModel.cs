@@ -19,7 +19,10 @@ namespace lab14
         {
             using (FileStream fs = new FileStream("cars.json", FileMode.Open))
             {
-                Cars = JsonSerializer.Deserialize<ObservableCollection<Car>>(fs);
+                try
+                {
+                    Cars = JsonSerializer.Deserialize<ObservableCollection<Car>>(fs);
+                } catch { Cars=new ObservableCollection<Car> { }; }
             }
         }
         public Car SelectedCar
@@ -45,7 +48,7 @@ namespace lab14
         }
         public void RefreshSource()
         {
-            using (FileStream fs = new FileStream("cars.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("cars.json", FileMode.Create))
             {
                 JsonSerializer.Serialize<ObservableCollection<Car>>(fs, Cars);
             }
